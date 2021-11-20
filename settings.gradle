@@ -1,0 +1,6 @@
+rootProject.name = 'clean-architecture-example'
+
+include 'core'
+include 'example-api'
+include 'adapters:lord-of-the-rings-api'
+

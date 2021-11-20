@@ -1,0 +1,63 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+	}
+}
+
+plugins {
+	id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+
+	ext {
+		libs = [
+		       inject: [
+					   "javax.inject:javax.inject:${inject}"
+		       ],
+			   uni_test: [
+					   "org.junit.jupiter:junit-jupiter-api:${junit}",
+					   "org.junit.jupiter:junit-jupiter-params:${junit}",
+					   "org.junit.jupiter:junit-jupiter-engine:${junit}"
+			   ]
+		]
+	}
+	repositories {
+		mavenCentral()
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		}
+	}
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+		compileOnly "org.projectlombok:lombok:${lombok}"
+		annotationProcessor "org.projectlombok:lombok:${lombok}"
+
+		testCompileOnly "org.projectlombok:lombok:${lombok}"
+		testAnnotationProcessor "org.projectlombok:lombok:${lombok}"
+
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+
+}
+
+
+
+
+

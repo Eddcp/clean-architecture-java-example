@@ -1,0 +1,36 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'java'
+    id 'application'
+}
+
+mainClassName = 'com.example.exampleapi.ExampleApiApplication'
+
+repositories {
+    mavenCentral()
+}
+
+springBoot {
+    buildInfo()
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':adapters:lord-of-the-rings-api')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation "io.springfox:springfox-swagger-ui:${swaggerUIVersion}"
+    implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
